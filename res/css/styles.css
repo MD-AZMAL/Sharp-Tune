@@ -1,0 +1,283 @@
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Lato Regular'), local('Lato-Regular'), url(../fonts/Lato-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans'), local('OpenSans'), url(../fonts/OpenSans-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: bolder;
+    font-weight: 900;
+    src: local('Open Sans ExtraBold'), local('OpenSansExtraBolder'), url(../fonts/OpenSans-ExtraBold.ttf) format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    user-select: none;
+}
+
+.center-it {
+    display:flex;
+    justify-content:center; /* horizontal */
+    align-items:center;     /* vertical */
+}
+
+.header-font {
+    font-family: 'Open Sans', sans-serif;
+    font-style: bolder;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.container {
+    height: 100vh;
+    background-color: red;
+}
+
+.task-bar {
+    width: 100%;
+    background-color: #EBEBEB;
+    height: 7%;
+}
+
+.play-task {
+    width: 60%;
+    height: 100%;
+    float: left;
+}
+
+.list-task {
+    width: 40%;
+    height: 100%;
+    float: right;
+}
+
+.folder {
+    text-align: center;
+}
+
+.play-view {
+    width: 60%;
+    background-color: #FFFFFF;
+    height: 93%;
+    float: left;
+    overflow: hidden;
+}
+
+.player {
+    margin-top: 21%;
+    width: 92%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.player-info {
+    display: flex;
+    font-family: 'Lato', sans-serif;
+    padding: 1% 0;
+}
+
+.seek-pos {
+    flex: 1;
+    order: 1;
+}
+
+.seek-bar {
+    flex: 10;
+    order: 2;
+    width: 100%;
+    padding: 0.5% 0;
+}
+
+.seek-duration {
+    flex: 1;
+    order: 3;
+    text-align: right;
+}
+
+.progress {
+    background-color: #262626;
+    width: 100%;
+    height: 80%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.current {
+    width: 0%;
+    height: 100%;
+    background-color: #DC0A2A;
+    border-radius: 10px;
+}
+
+.player-control {
+    padding: 0 8%;
+    display: flex;
+    font-size: 1.2rem;
+}
+
+.play-control {
+    flex: 1;
+    order: 1;
+    display: flex;
+    justify-content: space-between;
+}
+
+#prev {
+    flex: 1;
+    order: 1;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+#prev:hover {
+    color: #DC0A2A;
+}
+
+#prev:active {
+    color: #AA021B;
+}
+
+
+.space-fix-1 {
+    flex: 1;
+    order: 2;
+}
+
+#play {
+    color: #AA021B;
+    flex: 1;
+    order: 3;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+#play:active {
+    color: #262626;
+}
+
+.space-fix-2 {
+    flex: 1;
+    order: 4;
+}
+
+#next {
+    flex: 1;
+    order: 5;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+#next:hover {
+    color: #DC0A2A;
+}
+
+#next:active {
+    color: #AA021B;
+}
+
+.space-fix {
+    flex: 1;
+    order: 2;
+    width: 100%;
+}
+
+.volume-control {
+    flex: 1;
+    order: 3;
+    display: flex;
+}
+
+#vol {
+    flex: 1;
+    order: 1;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+#vol:hover {
+    color: #DC0A2A;
+}
+
+#vol:active {
+    color: #AA021B;
+}
+
+.vol-bar {
+    flex: 4;
+    order: 2;
+    width: 100%;
+    height: 80%;
+}
+
+.vol-progress {
+    width: 100%;
+    height: 60%;
+    background-color: #262626;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.vol-current {
+    width: 100%;
+    height: 100%;
+    background-color: #DC0A2A;
+    border-radius: 10px;
+}
+
+
+
+.list-view {
+    width: 40%;
+    background-color: #DC0A2A;
+    height: 93%;
+    float: right;
+    overflow: auto;
+}
+
+ul {
+    cursor: pointer;
+}
+
+.list {
+    display: flex;
+    padding: 1% 5%;
+    font-family: 'Lato',sans-serif;
+    color: #FFFFFF;
+}
+
+.index {
+    flex: 1;
+    order: 1;
+}
+
+.song {
+    display: block;
+    flex: 3;
+    order: 2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.duration {
+    flex: 2;
+    order: 3;
+    text-align: right;
+}
+
+.selected {
+    background-color: #AA021B;
+    font-weight: 900;
+}

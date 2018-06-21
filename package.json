@@ -1,0 +1,23 @@
+{
+  "name": "playnow",
+  "version": "1.0.0",
+  "description": "Lightweight Cross-platform music player build upon the node using the electron framework.",
+  "main": "main.js",
+  "dependencies": {
+    "musicmetadata": "^2.0.5"
+  },
+  "devDependencies": {
+    "electron": "^2.0.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron .",
+    "pack": "build --dir"
+  },
+  "build": {
+    "appId": "com.#tune.www",
+    "productName": "#Tune"
+  },
+  "author": "Md. Azmal",
+  "license": "ISC"
+}

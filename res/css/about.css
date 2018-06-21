@@ -1,0 +1,84 @@
+@font-face {
+    font-family: 'Lato';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Lato Regular'), local('Lato-Regular'), url(../fonts/Lato-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans'), local('OpenSans'), url(../fonts/OpenSans-Regular.ttf) format('truetype');
+}
+
+
+@font-face {
+    font-family: 'Open Sans';
+    font-style: bolder;
+    font-weight: 900;
+    src: local('Open Sans ExtraBold'), local('OpenSansExtraBolder'), url(../fonts/OpenSans-ExtraBold.ttf) format('truetype');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    text-align: center;
+    background:  #EBEBEB;
+   
+}
+
+h3 {
+    font-family: 'Open Sans';
+    font-style: bolder;
+    font-size: 30px;
+    padding: 10px;
+    background:  #262626;
+    color: white;
+    flex: 1;
+}
+
+p {
+    font-family: 'Lato';
+    flex: 2;
+    padding: 10px;
+    font-size: 20px;
+    color: #262626;
+}
+
+
+
+.container {
+    margin: 0 auto;
+    width: 40%;
+    flex: 2;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+    font-size: 34px;
+}
+
+li {
+    padding: 0 1rem;
+}
+
+.git {
+    color: #262626;
+}
+
+.linked {
+    color: #0077B5;
+}
+
+.tweet {
+    color: #1da1f2;
+}
+
+
+

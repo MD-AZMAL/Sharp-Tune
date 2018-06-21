@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>About</title>
+    <link rel="stylesheet" href="res/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="res/css/about.css">
+</head>
+
+<body>
+    <h3>#Tune V.1.0.0</h3>
+    <p>Lightweight Cross-platform music player build upon the node using the electron framework.</p>
+    <p>Developed by Md. Azmal</p>
+    <div class="container">
+        <ul>
+            <li>
+                <span class="fab fa-github git"></span>
+            </li>
+            <li>
+                <span class="fab fa-linkedin-in linked"></span>
+            </li>
+            <li>
+                <span class="fab fa-twitter tweet"></span>
+            </li>
+        </ul>
+    </div>
+    <div class="copy">
+        <p>Copyright &copy; 2018 Md. Azmal</p>
+    </div>
+    <!--Script-->
+    <script>
+        const shell = require('electron').shell;
+        var git = document.querySelector('.git');
+        var linked = document.querySelector('.linked');
+        var tweet = document.querySelector('.tweet');
+
+        git.addEventListener('click', () => {
+            shell.openExternal('https://github.com/MD-AZMAL');
+        })
+
+        linked.addEventListener('click', () => {
+            shell.openExternal('https://www.linkedin.com/in/md-azmal-570308160');
+        })
+
+        tweet.addEventListener('click', () => {
+            shell.openExternal('https://twitter.com/MDAzMaL11');
+        })
+    </script>
+</body>
+
+</html>
