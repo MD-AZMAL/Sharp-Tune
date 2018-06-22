@@ -19,9 +19,7 @@
     "start": "electron .",
     "pack": "build --dir",
     "dist": "build",
-    "build": "build --win",
-    "gh-publish": "build --win -p always",
-    "gh-publish-linux": "build --linux -p always"
+    "gh-publish": "build --win -p always"
   },
   "build": {
     "publish": [
@@ -49,12 +47,11 @@
       ]
     },
     "linux": {
+      "maintainer": "Md Azmal <azmalmd12@gmail.com>",
+      "icon": "build/logo.png",
       "target": [
-        "AppImage",
         "deb"
-      ],
-      "maintainer": "Md. Azmal <azmalmd12@gmail.com>",
-      "icon": "build/logo.png"
+      ]
     },
     "win": {
       "icon": "build/icon.ico"
