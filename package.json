@@ -22,6 +22,8 @@
     "gh-publish": "build --win -p always"
   },
   "build": {
+    "appId": "com.sharp-tune.www",
+    "productName": "Sharp Tune",
     "publish": [
       {
         "provider": "github",
@@ -31,7 +33,6 @@
         "releaseType": "release"
       }
     ],
-    "appId": "com.sharp-tune.www",
     "dmg": {
       "contents": [
         {
@@ -57,6 +58,6 @@
       "icon": "build/icon.ico"
     }
   },
-  "author": "Md. Azmal",
+  "author": "Md Azmal <azmalmd12@gmail.com>",
   "license": "MIT"
 }
