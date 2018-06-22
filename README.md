@@ -1,5 +1,5 @@
 # #Tune
-**Version 1.1.0**
+**Version 1.0.0**
 
 Lightweight Cross-platform music player build upon the node using the electron framework.
 
