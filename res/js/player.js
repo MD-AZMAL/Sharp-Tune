@@ -5,6 +5,7 @@ const mm = require('musicmetadata');
 
 const volume_slider = $('.vol-progress');
 const volume_current = $('.vol-current');
+const play_header = $('.play-header');
 const folder_name = $('.folder');
 const progress = $('.progress');
 const current = $('.current');
@@ -51,6 +52,10 @@ ipc.on('selected-folder', (event, obj) => {
             }
         });
     });
+});
+
+ipc.on('update-download', (event, perc) => {
+    play_header.html('Download Progress : ' + parseInt(perc) + '%');
 });
 
 volume_slider.mousedown(function (event) {
