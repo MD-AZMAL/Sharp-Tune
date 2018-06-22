@@ -4,7 +4,7 @@
 Lightweight Cross-platform music player build upon the node using the electron framework.
 
 ## Screenshot
-[[https://raw.githubusercontent.com/MD-AZMAL/Sharp-Tune/master/screen_shot_v_1_0_0.png|alt=Sharp-tune]]
+![Sharp Tune](https://raw.githubusercontent.com/MD-AZMAL/Sharp-Tune/master/screen_shot_v_1_0_0.png)
 
 # Usage
 ## Application
