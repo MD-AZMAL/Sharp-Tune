@@ -18,7 +18,6 @@ autoUpdater.logger.transports.file.level = 'info';
 
 let MainWin, AboutWin;
 let ico = nativeImage.createFromPath(path.join(__dirname, 'logo.png'));
-let start_app = true;
 
 function createMainWindow() {
     MainWin = new BrowserWindow({
@@ -190,9 +189,6 @@ autoUpdater.on('error', (err) => {
 });
 
 app.on('ready', () => {
-    if (start_app) {
-        autoUpdater.checkForUpdates();
-    }
     createMainWindow();
 });
 
