@@ -37,23 +37,44 @@ ipc.on('selected-folder', (event, obj) => {
     global_loc = obj.loc;
     song_list.html('');
     obj.files.forEach((file) => {
-        var parser = mm(fs.createReadStream(global_loc + sl + file), { duration: true }, function (err, metadata) {
-            if (!err) {
-                playList.push({
-                    index: gi,
-                    song: file,
-                    song_name: metadata.title || file,
-                    duration: metadata.duration
-                });
-                song_list.append(`<li class="list">
-                <span class="index">${playList[gi].index + 1}</span>
-                <span class="song">${playList[gi].song_name}</span>
-                <span class="duration">${toTime(playList[gi].duration)}</span>
-                </li>`);
-                gi++;
-            }
-        });
+        if (file.endsWith('.wav') || file.endsWith('.WAV')) {
+            let tmph = new Howl({
+                src: [global_loc + sl + file],
+                onload: function () {
+                    playList.push({
+                        index: gi,
+                        song: file,
+                        song_name: file,
+                        duration: this.duration()
+                    });
+                    song_list.append(`<li class="list">
+                    <span class="index">${playList[gi].index + 1}</span>
+                    <span class="song">${playList[gi].song_name}</span>
+                    <span class="duration">${toTime(playList[gi].duration)}</span>
+                    </li>`);
+                    gi++;
+                }
+            })
+        } else {
+            var parser = mm(fs.createReadStream(global_loc + sl + file), { duration: true }, function (err, metadata) {
+                if (!err) {
+                    playList.push({
+                        index: gi,
+                        song: file,
+                        song_name: metadata.title || file,
+                        duration: metadata.duration
+                    });
+                    song_list.append(`<li class="list">
+                    <span class="index">${playList[gi].index + 1}</span>
+                    <span class="song">${playList[gi].song_name}</span>
+                    <span class="duration">${toTime(playList[gi].duration)}</span>
+                    </li>`);
+                    gi++;
+                }
+            });
+        }
     });
+
 });
 
 ipc.on('update-download', (event, perc) => {
