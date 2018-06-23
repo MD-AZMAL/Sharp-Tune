@@ -26,16 +26,18 @@ var global_loc;
 var current_song;
 var curren_index;
 var playList = []
+var sl;
 
 ipc.on('selected-folder', (event, obj) => {
     let gi = 0;
     curren_index = 0;
-    folder_name.html(obj.loc.split('\\')[obj.loc.split('\\').length - 1]);
+    sl = obj.sl;
+    folder_name.html(obj.loc.split(sl)[obj.loc.split(sl).length - 1]);
     playList = [];
     global_loc = obj.loc;
     song_list.html('');
     obj.files.forEach((file) => {
-        var parser = mm(fs.createReadStream(global_loc + '\\' + file), { duration: true }, function (err, metadata) {
+        var parser = mm(fs.createReadStream(global_loc + sl + file), { duration: true }, function (err, metadata) {
             if (!err) {
                 playList.push({
                     index: gi,
@@ -158,7 +160,7 @@ function init_play() {
         change_pl_ico();
     }
     current_song = new Howl({
-        src: [global_loc + '\\' + playList[curren_index].song],
+        src: [global_loc + sl + playList[curren_index].song],
         volume: global_volume / 100,
         onend: next_song,
         onload: function () {

@@ -19,7 +19,8 @@
     "start": "electron .",
     "pack": "build --dir",
     "dist": "build",
-    "gh-publish": "build --win -p always"
+    "gh-publish": "build --win -p always",
+    "gh-publish-linux": "build --linux -p always"
   },
   "build": {
     "appId": "com.sharp-tune.www",

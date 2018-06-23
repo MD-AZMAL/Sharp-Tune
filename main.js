@@ -117,8 +117,15 @@ function createMainWindow() {
 function selectFolderDialog() {
     dialog.showOpenDialog({ properties: ['openDirectory'] }, file => {
         if (file) {
+            let sl;
+            if (process.platform === 'linux') {
+                sl = '/';
+            } else if (process.platform === 'win32') {
+                sl = '\\';
+            }
+
             fs.readdir(file[0], (err, files) => {
-                let fileObject = { loc: file[0], files: [] };
+                let fileObject = { sl: sl, loc: file[0], files: [] };
                 files.forEach((current_file) => {
                     if (current_file.endsWith('.mp3') || current_file.endsWith('.wav')
                         || current_file.endsWith('.m4a') || current_file.endsWith('.MP3')
