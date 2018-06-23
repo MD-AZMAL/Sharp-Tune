@@ -29,6 +29,11 @@ var playList = []
 var sl;
 
 ipc.on('selected-folder', (event, obj) => {
+    if (current_song) {
+        current_song.stop();
+        current_song = null;
+        current_play.html(' ');
+    }
     let gi = 0;
     curren_index = 0;
     sl = obj.sl;
