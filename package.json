@@ -50,7 +50,7 @@
     },
     "linux": {
       "maintainer": "Md Azmal <azmalmd12@gmail.com>",
-      "icon": "build/logo.png",
+      "icon": "build/512x512.png",
       "target": [
         "deb"
       ]
