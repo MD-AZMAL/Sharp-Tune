@@ -50,9 +50,10 @@
     },
     "linux": {
       "maintainer": "Md Azmal <azmalmd12@gmail.com>",
-      "icon": "build/512x512.png",
+      "icon": "build/512x512.icns",
       "target": [
-        "AppImage"
+        "AppImage",
+        "deb"
       ]
     },
     "win": {
