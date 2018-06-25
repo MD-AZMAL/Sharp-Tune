@@ -12,7 +12,8 @@
     "musicmetadata": "^2.0.5"
   },
   "devDependencies": {
-    "electron": "^2.0.2"
+    "electron": "^2.0.2",
+    "electron-builder": "^20.15.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -50,14 +51,14 @@
     },
     "linux": {
       "maintainer": "Md Azmal <azmalmd12@gmail.com>",
-      "icon": "build/512x512.icns",
+      "icon": "./build/png",
       "target": [
         "AppImage",
         "deb"
       ]
     },
     "win": {
-      "icon": "build/icon.ico"
+      "icon": "./build/ico/icon.ico"
     }
   },
   "author": "Md Azmal <azmalmd12@gmail.com>",
