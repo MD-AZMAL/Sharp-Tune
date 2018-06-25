@@ -51,6 +51,7 @@
     },
     "linux": {
       "maintainer": "Md Azmal <azmalmd12@gmail.com>",
+      "category": "Audio",
       "icon": "./build/png",
       "target": [
         "AppImage",
