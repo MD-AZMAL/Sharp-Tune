@@ -1,4 +1,5 @@
 const electron = require('electron');
+const remote = electron.remote;
 const ipc = electron.ipcRenderer;
 const fs = require('fs');
 const mm = require('musicmetadata');
@@ -30,7 +31,7 @@ var sl;
 
 ipc.on('selected-folder', (event, obj) => {
     if (current_song) {
-        current_song.stop();
+        current_song.pause();
         current_song = null;
         current_play.html(' ');
     }
@@ -43,23 +44,24 @@ ipc.on('selected-folder', (event, obj) => {
     song_list.html('');
     obj.files.forEach((file) => {
         if (file.endsWith('.wav') || file.endsWith('.WAV')) {
-            let tmph = new Howl({
-                src: [global_loc + sl + file],
-                onload: function () {
-                    playList.push({
-                        index: gi,
-                        song: file,
-                        song_name: file,
-                        duration: this.duration()
-                    });
-                    song_list.append(`<li class="list">
-                    <span class="index">${playList[gi].index + 1}</span>
-                    <span class="song">${playList[gi].song_name}</span>
-                    <span class="duration">${toTime(playList[gi].duration)}</span>
-                    </li>`);
-                    gi++;
-                }
-            })
+            let tmp = new Audio();
+            tmp.src = global_loc + sl + file;
+            tmp.loop = false;
+            tmp.onloadeddata = function () {
+                playList.push({
+                    index: gi,
+                    song: file,
+                    song_name: file,
+                    duration: tmp.duration
+                })
+                song_list.append(`<li class="list">
+            <span class="index">${playList[gi].index + 1}</span>
+            <span class="song">${playList[gi].song_name}</span>
+            <span class="duration">${toTime(playList[gi].duration)}</span>
+            </li>`);
+                gi++;
+            }
+
         } else {
             var parser = mm(fs.createReadStream(global_loc + sl + file), { duration: true }, function (err, metadata) {
                 if (!err) {
@@ -144,7 +146,7 @@ function init_global_vol(mx) {
     global_volume = (mx - rp) / w * 100;
     volume_current.css('width', global_volume + '%');
     if (current_song) {
-        current_song.volume(global_volume / 100);
+        current_song.volume = (global_volume / 100);
     }
 }
 
@@ -152,25 +154,26 @@ function init_seek(mx) {
     if (current_song) {
         let rp = parseInt(progress.offset().left);
         let w = parseInt(progress.width());
-        let dx = current_song.duration() / w;
-        let rmx = mx - rp;
-        current_song.seek(dx * rmx);
+        let dx = current_song.duration / w;
+        let rmx = mx - rp
+        current_song.currentTime = (dx * rmx);
         let perc = rmx / w * 100;
-        current.css('width', perc + 1 + '%');
+        current.css('width', perc + '%');
+        console.log(current_song.duration + ' ' + current_song.currentTime)
     }
 }
 
 function update_seek() {
     if (current_song) {
-        seek_pos.html(toTime(current_song.seek()));
+        seek_pos.html(toTime(current_song.currentTime));
         let w = parseInt(progress.width());
-        let dy = w / current_song.duration();
-        current.css('width', (dy * current_song.seek() + 1));
+        let dy = w / current_song.duration;
+        current.css('width', (dy * current_song.currentTime));
     }
 }
 
 function change_pl_ico() {
-    if (current_song.playing()) {
+    if (!current_song.paused) {
         pl_pa.removeClass('fa-play');
         pl_pa.addClass('fa-pause');
 
@@ -182,33 +185,28 @@ function change_pl_ico() {
 
 function init_play() {
     if (current_song) {
-        current_song.stop();
+        current_song.pause();
         change_pl_ico();
     }
-    current_song = new Howl({
-        src: [global_loc + sl + playList[curren_index].song],
-        volume: global_volume / 100,
-        onend: next_song,
-        onload: function () {
-            current_play.html(playList[curren_index].song_name);
-            song_duration.html(toTime(playList[curren_index].duration));
-            toggle_play();
-        }
-    });
-
+    current_song = new Audio();
+    current_song.src = global_loc + sl + playList[curren_index].song;
+    current_song.onended = next_song;
+    current_song.onloadeddata = function () {
+        current_play.html(playList[curren_index].song_name);
+        song_duration.html(toTime(playList[curren_index].duration));
+        toggle_play();
+    }
 }
 
 function toggle_mute() {
     if (current_song) {
-        if (current_song.volume() == 0) {
-            console.log('zero');
+        if (current_song.volume == 0) {
             let rp = parseInt(volume_slider.offset().left);
             let w = parseInt(volume_slider.width());
             init_global_vol((prev_vol * w / 100) + rp);
             vol.removeClass('fa-volume-off');
             vol.addClass('fa-volume-up');
         } else {
-            console.log('Not Zero');
             prev_vol = global_volume;
             init_global_vol(parseInt(volume_slider.offset().left));
             vol.removeClass('fa-volume-up');
@@ -219,7 +217,7 @@ function toggle_mute() {
 }
 
 function toggle_play() {
-    if (current_song.playing()) {
+    if (!current_song.paused) {
         current_song.pause();
     } else {
         current_song.play();
