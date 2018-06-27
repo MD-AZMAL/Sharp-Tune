@@ -19,7 +19,7 @@ const prev = $('#prev')
 const vol = $('#vol');
 const list = $('.list');
 const song_list = $('ul');
-
+const canvas = $('#visualCanvas')[0];
 
 var global_volume = volume_current.width() / volume_slider.width() * 100;
 var prev_vol = global_volume;
@@ -28,6 +28,14 @@ var current_song;
 var curren_index;
 var playList = []
 var sl;
+
+var context = new AudioContext();
+var c;
+var analyser;
+var bufferLen;
+var source;
+var fbc_arr;
+var bar_x, bar_width, bar_height;
 
 ipc.on('selected-folder', (event, obj) => {
     if (current_song) {
@@ -146,7 +154,8 @@ function init_global_vol(mx) {
     global_volume = (mx - rp) / w * 100;
     volume_current.css('width', global_volume + '%');
     if (current_song) {
-        current_song.volume = (global_volume / 100);
+        let tmp_vol = ((global_volume / 100) > 1) ? 1 : global_volume / 100;
+        current_song.volume = tmp_vol;
     }
 }
 
@@ -164,6 +173,7 @@ function init_seek(mx) {
 }
 
 function update_seek() {
+    requestAnimationFrame(update_seek);
     if (current_song) {
         seek_pos.html(toTime(current_song.currentTime));
         let w = parseInt(progress.width());
@@ -195,6 +205,7 @@ function init_play() {
         current_play.html(playList[curren_index].song_name);
         song_duration.html(toTime(playList[curren_index].duration));
         toggle_play();
+        initVisualiser();
     }
 }
 
@@ -243,4 +254,33 @@ function prev_song() {
     song_change();
 }
 
-setInterval(update_seek, 10);
+// visualiser
+
+
+function initVisualiser() {
+    c = canvas.getContext('2d');
+    analyser = context.createAnalyser();
+    source = context.createMediaElementSource(current_song);
+    source.connect(analyser);
+    analyser.connect(context.destination);
+    analyser.fftSize = 1024;
+    bufferLen = analyser.frequencyBinCount
+    fbc_arr = new Uint8Array(bufferLen);
+    frameLoop();
+}
+
+function frameLoop() {
+    window.requestAnimationFrame(frameLoop);
+    analyser.getByteFrequencyData(fbc_arr);
+    c.clearRect(0, 0, canvas.width, canvas.height);
+    c.fillStyle = '#A90606';
+    bar_x = 0;
+    bar_width = (canvas.width / bufferLen) * 2.5;
+    for (let i = 0; i < bufferLen; i++) {
+        bar_height = fbc_arr[i] / 3;
+        c.fillRect(bar_x, canvas.height, bar_width, - bar_height);
+        bar_x += bar_width + 2;
+    }
+}
+
+update_seek();
