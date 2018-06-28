@@ -69,7 +69,7 @@
 .play-view {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 60%;
     height: 93%;
     float: left;
@@ -96,7 +96,7 @@
 }
 
 canvas {
-    flex: 1;
+    flex: 3;
     order: 3;
     outline: 0;
 }

@@ -131,7 +131,6 @@ prev.on('click', prev_song);
 
 song_list.on('click', 'li', function (event) {
     curren_index = $(this).children().eq(0).html() - 1;
-    console.log(curren_index)
     song_change();
 })
 
@@ -168,7 +167,6 @@ function init_seek(mx) {
         current_song.currentTime = (dx * rmx);
         let perc = rmx / w * 100;
         current.css('width', perc + '%');
-        console.log(current_song.duration + ' ' + current_song.currentTime)
     }
 }
 
@@ -259,6 +257,12 @@ function prev_song() {
 
 function initVisualiser() {
     c = canvas.getContext('2d');
+
+    let grd = c.createLinearGradient(0, canvas.height, 0, canvas.height / 1.3);
+    grd.addColorStop(0, "#DC0A2A");
+    grd.addColorStop(1, '#ff0000');
+    c.fillStyle = grd;
+
     analyser = context.createAnalyser();
     source = context.createMediaElementSource(current_song);
     source.connect(analyser);
@@ -273,12 +277,12 @@ function frameLoop() {
     window.requestAnimationFrame(frameLoop);
     analyser.getByteFrequencyData(fbc_arr);
     c.clearRect(0, 0, canvas.width, canvas.height);
-    c.fillStyle = '#A90606';
+
     bar_x = 0;
-    bar_width = (canvas.width / bufferLen) * 2.5;
+    bar_width = parseInt((canvas.width / bufferLen) * 2.5);
     for (let i = 0; i < bufferLen; i++) {
         bar_height = fbc_arr[i] / 3;
-        c.fillRect(bar_x, canvas.height, bar_width, - bar_height);
+        c.fillRect(bar_x, canvas.height, bar_width, - parseInt(bar_height));
         bar_x += bar_width + 2;
     }
 }

@@ -53,12 +53,6 @@ function createMainWindow() {
                     accelerator: 'CmdOrCtrl + F',
                     click: selectFolderDialog
                 },
-                // {
-                //     role: 'toggledevtools'
-                // },
-                // {
-                //     role: 'reload'
-                // },
                 {
                     type: 'separator'
                 },
