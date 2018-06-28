@@ -202,6 +202,8 @@ function init_play() {
     current_song.onloadeddata = function () {
         current_play.html(playList[curren_index].song_name);
         song_duration.html(toTime(playList[curren_index].duration));
+        let tmp_vol = ((global_volume / 100) > 1) ? 1 : global_volume / 100;
+        current_song.volume = tmp_vol;
         toggle_play();
         initVisualiser();
     }
