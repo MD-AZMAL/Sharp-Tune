@@ -42,7 +42,6 @@
 
 .container {
     height: 100vh;
-    background-color: red;
 }
 
 .task-bar {
@@ -68,15 +67,23 @@
 }
 
 .play-view {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     width: 60%;
-    background-color: #FFFFFF;
     height: 93%;
     float: left;
     overflow: hidden;
 }
 
+.space-fix-3 {
+    flex: 1;
+    order: 1;
+}
+
 .player {
-    margin-top: 21%;
+    flex: 1;
+    order: 2;
     width: 92%;
     margin-left: auto;
     margin-right: auto;
@@ -87,6 +94,13 @@
     font-family: 'Lato', sans-serif;
     padding: 1% 0;
 }
+
+canvas {
+    flex: 3;
+    order: 3;
+    outline: 0;
+}
+
 
 .seek-pos {
     flex: 1;
@@ -235,8 +249,6 @@
     background-color: #DC0A2A;
     border-radius: 10px;
 }
-
-
 
 .list-view {
     width: 40%;

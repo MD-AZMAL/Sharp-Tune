@@ -53,13 +53,6 @@ function createMainWindow() {
                     accelerator: 'CmdOrCtrl + F',
                     click: selectFolderDialog
                 },
-                // For Devs
-                // {
-                //     role: 'toggledevtools'
-                // },
-                // {
-                //     role: 'reload'
-                // },
                 {
                     type: 'separator'
                 },
@@ -81,6 +74,7 @@ function createMainWindow() {
                         AboutWin = new BrowserWindow({
                             center: true,
                             parent: MainWin,
+                            modal: true,
                             width: 500,
                             height: 300,
                             minWidth: 500,
@@ -109,6 +103,16 @@ function createMainWindow() {
             ]
         }
     ];
+
+    if (isDev) {
+        template.push({
+            label: 'Dev',
+            submenu: [
+                { role: 'toggledevtools' },
+                { role: 'reload' }
+            ]
+        });
+    }
 
     let appMenu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(appMenu);

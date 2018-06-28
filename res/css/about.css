@@ -68,6 +68,10 @@ li {
     padding: 0 1rem;
 }
 
+span {
+    cursor: pointer;
+}
+
 .git {
     color: #262626;
 }
