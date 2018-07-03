@@ -105,6 +105,7 @@ canvas {
 .seek-pos {
     flex: 1;
     order: 1;
+    color: #AA021B;
 }
 
 .seek-bar {
@@ -118,6 +119,7 @@ canvas {
     flex: 1;
     order: 3;
     text-align: right;
+    color: #AA021B;
 }
 
 .progress {

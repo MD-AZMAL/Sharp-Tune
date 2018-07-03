@@ -38,6 +38,7 @@ var fbc_arr;
 var bar_x, bar_width, bar_height;
 
 ipc.on('selected-folder', (event, obj) => {
+    reset_ui();
     if (current_song) {
         current_song.pause();
         current_song = null;
@@ -49,7 +50,6 @@ ipc.on('selected-folder', (event, obj) => {
     folder_name.html(obj.loc.split(sl)[obj.loc.split(sl).length - 1]);
     playList = [];
     global_loc = obj.loc;
-    song_list.html('');
     obj.files.forEach((file) => {
         if (file.endsWith('.wav') || file.endsWith('.WAV')) {
             let tmp = new Audio();
@@ -95,6 +95,14 @@ ipc.on('selected-folder', (event, obj) => {
 ipc.on('update-download', (event, perc) => {
     play_header.html('Download Progress : ' + parseInt(perc) + '%');
 });
+
+function reset_ui() {
+    current_play.html('&nbsp;'); // \u00a0 is non-breakable space
+    song_duration.html('0:00');
+    seek_pos.html('0:00');
+    current.css('width', '0%');
+    song_list.html('');
+}
 
 volume_slider.mousedown(function (event) {
     init_global_vol(event.pageX);

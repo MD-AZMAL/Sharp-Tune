@@ -18,8 +18,11 @@ autoUpdater.logger.transports.file.level = 'info';
 
 let MainWin, AboutWin;
 let ico = nativeImage.createFromPath(path.join(__dirname, 'logo.png'));
+let usr_apd = false;
 
 function createMainWindow() {
+    autoUpdater.checkForUpdates();
+
     MainWin = new BrowserWindow({
         show: false,
         center: true,
@@ -97,6 +100,7 @@ function createMainWindow() {
                 {
                     label: 'Check for Updates',
                     click: () => {
+                        usr_apd = true;
                         autoUpdater.checkForUpdates();
                     }
                 }
@@ -162,13 +166,16 @@ autoUpdater.on('update-available', (info) => {
 });
 
 autoUpdater.on('update-not-available', () => {
-    dialog.showMessageBox(MainWin, {
-        title: 'Updates',
-        type: 'info',
-        message: 'Update Not Available',
-        detail: 'Your App is Up-todate',
-        buttons: ['OK']
-    });
+    if(usr_apd) {
+        dialog.showMessageBox(MainWin, {
+            title: 'Updates',
+            type: 'info',
+            message: 'Update Not Available',
+            detail: 'Your App is Up-todate',
+            buttons: ['OK']
+        });
+        usr_apd = false;
+    }
 });
 
 autoUpdater.on('download-progress', (progress) => {
