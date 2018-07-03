@@ -1,5 +1,5 @@
 # #Tune
-**Version 1.0.2**
+**Version 1.0.3**
 
 [![License](https://img.shields.io/github/license/MD-AZMAL/Sharp-Tune.svg?style=for-the-badge)](https://github.com/MD-AZMAL/Sharp-Tune)
 [![Github All Releases](https://img.shields.io/github/downloads/MD-AZMAL/Sharp-Tune/total.svg?style=for-the-badge)](https://github.com/MD-AZMAL/Sharp-Tune)
