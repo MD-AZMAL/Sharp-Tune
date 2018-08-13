@@ -21,7 +21,10 @@ let ico = nativeImage.createFromPath(path.join(__dirname, 'logo.png'));
 let usr_apd = false;
 
 function createMainWindow() {
-    autoUpdater.checkForUpdates();
+    if (!isDev) {
+        autoUpdater.checkForUpdates();
+
+    }
 
     MainWin = new BrowserWindow({
         show: false,
@@ -166,7 +169,7 @@ autoUpdater.on('update-available', (info) => {
 });
 
 autoUpdater.on('update-not-available', () => {
-    if(usr_apd) {
+    if (usr_apd) {
         dialog.showMessageBox(MainWin, {
             title: 'Updates',
             type: 'info',
