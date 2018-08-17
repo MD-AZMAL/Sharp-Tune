@@ -1,4 +1,7 @@
 # #Tune
+
+<img src="Logotype primary.png" width="70%" height="70%" />
+
 **Version 1.0.3**
 
 [![License](https://img.shields.io/github/license/MD-AZMAL/Sharp-Tune.svg?style=for-the-badge)](https://github.com/MD-AZMAL/Sharp-Tune)
