@@ -31,10 +31,13 @@ Lightweight Cross-platform music player build upon the node using the electron f
 * LightWeight 
 * Supports commmon multimedia format
 
-#Whats New!
+# Whats New!
 * Removed 3rd party dependecy for playing song
 * Used Web Audio API
 * Added Audio Visualiser
+
+# Credits
+* Logo: ![mansya](https://github.com/mansya)
 
 # License & Copyright
 &copy; 2018 Md Azmal
