@@ -136,14 +136,15 @@ function selectFolderDialog() {
             }
 
             fs.readdir(file[0], (err, files) => {
-                let fileObject = { sl: sl, loc: file[0], files: [] };
-                files.forEach((current_file) => {
-                    if (current_file.endsWith('.mp3') || current_file.endsWith('.wav')
-                        || current_file.endsWith('.m4a') || current_file.endsWith('.MP3')
-                        || current_file.endsWith('.WAV') || current_file.endsWith('.M4A')) {
-                        fileObject.files.push(current_file);
-                    }
-                });
+                let fileObject = {
+                    sl: sl,
+                    loc: file[0],
+                    files: files.filter(file => {
+                        return ['.mp3', '.wav', '.m4a', '.opus', '.mp3', '.flac', '.mp2', '.wma', '.asf', '.ogg', '.opus', '.aif', '.aac', '.ape', '.oga', '.wv']
+                           .indexOf(path.extname(file).toLowerCase()) !== -1;
+                        })
+                };
+
                 MainWin.webContents.send('selected-folder', fileObject);
             });
         }
