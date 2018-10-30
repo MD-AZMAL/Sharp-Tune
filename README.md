@@ -17,7 +17,7 @@ Lightweight Cross-platform music player build upon the node using the electron f
 
 # Usage
 ## Application
-* Start the Application and select File option in the Application and menu.
+* Start the Application and select File option in the Application's menu.
 * Select the folder where you have the media files
 * Select one from the List and enjoy!!
 
