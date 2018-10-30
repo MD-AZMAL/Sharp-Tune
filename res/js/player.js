@@ -25,7 +25,7 @@ var global_volume = volume_current.width() / volume_slider.width() * 100;
 var prev_vol = global_volume;
 var global_loc;
 var current_song;
-var curren_index;
+var current_index;
 var playList = []
 var sl;
 
@@ -45,7 +45,7 @@ ipc.on('selected-folder', (event, obj) => {
         current_play.html(' ');
     }
     let gi = 0;
-    curren_index = 0;
+    current_index = 0;
     sl = obj.sl;
     folder_name.html(obj.loc.split(sl)[obj.loc.split(sl).length - 1]);
     playList = [];
@@ -138,7 +138,7 @@ next.on('click', next_song);
 prev.on('click', prev_song);
 
 song_list.on('click', 'li', function (event) {
-    curren_index = $(this).children().eq(0).html() - 1;
+    current_index = $(this).children().eq(0).html() - 1;
     song_change();
 })
 
@@ -150,7 +150,7 @@ function toTime(seconds) {
 
 function song_change() {
     song_list.children().removeClass('selected');
-    song_list.children().eq(curren_index).addClass('selected');
+    song_list.children().eq(current_index).addClass('selected');
     init_play();
 }
 
@@ -205,11 +205,11 @@ function init_play() {
         change_pl_ico();
     }
     current_song = new Audio();
-    current_song.src = global_loc + sl + playList[curren_index].song;
+    current_song.src = global_loc + sl + playList[current_index].song;
     current_song.onended = next_song;
     current_song.onloadeddata = function () {
-        current_play.html(playList[curren_index].song_name);
-        song_duration.html(toTime(playList[curren_index].duration));
+        current_play.html(playList[current_index].song_name);
+        song_duration.html(toTime(playList[current_index].duration));
         let tmp_vol = ((global_volume / 100) > 1) ? 1 : global_volume / 100;
         current_song.volume = tmp_vol;
         toggle_play();
@@ -245,19 +245,19 @@ function toggle_play() {
 }
 
 function next_song() {
-    if (curren_index == playList.length - 1) {
-        curren_index = 0
+    if (current_index == playList.length - 1) {
+        current_index = 0
     } else {
-        curren_index++;
+        current_index++;
     }
     song_change();
 }
 
 function prev_song() {
-    if (curren_index == 0) {
-        curren_index = playList.length - 1;
+    if (current_index == 0) {
+        current_index = playList.length - 1;
     } else {
-        curren_index--;
+        current_index--;
     }
     song_change();
 }
