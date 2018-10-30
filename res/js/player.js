@@ -2,7 +2,7 @@ const electron = require('electron');
 const remote = electron.remote;
 const ipc = electron.ipcRenderer;
 const fs = require('fs');
-const mm = require('musicmetadata');
+const mm = require('music-metadata');
 
 const volume_slider = $('.vol-progress');
 const volume_current = $('.vol-current');
@@ -50,47 +50,33 @@ ipc.on('selected-folder', (event, obj) => {
     folder_name.html(obj.loc.split(sl)[obj.loc.split(sl).length - 1]);
     playList = [];
     global_loc = obj.loc;
-    obj.files.forEach((file) => {
-        if (file.endsWith('.wav') || file.endsWith('.WAV')) {
-            let tmp = new Audio();
-            tmp.src = global_loc + sl + file;
-            tmp.loop = false;
-            tmp.onloadeddata = function () {
-                playList.push({
-                    index: gi,
-                    song: file,
-                    song_name: file,
-                    duration: tmp.duration
-                })
-                song_list.append(`<li class="list">
-            <span class="index">${playList[gi].index + 1}</span>
-            <span class="song">${playList[gi].song_name}</span>
-            <span class="duration">${toTime(playList[gi].duration)}</span>
-            </li>`);
-                gi++;
-            }
-
-        } else {
-            var parser = mm(fs.createReadStream(global_loc + sl + file), { duration: true }, function (err, metadata) {
-                if (!err) {
-                    playList.push({
-                        index: gi,
-                        song: file,
-                        song_name: metadata.title || file,
-                        duration: metadata.duration
-                    });
-                    song_list.append(`<li class="list">
-                    <span class="index">${playList[gi].index + 1}</span>
-                    <span class="song">${playList[gi].song_name}</span>
-                    <span class="duration">${toTime(playList[gi].duration)}</span>
-                    </li>`);
-                    gi++;
-                }
-            });
-        }
-    });
-
+    parseFiles(obj.files, gi, sl);
 });
+
+/**
+ * Ensure files parsed in a s
+ * @param files
+ * @param gi
+ */
+function parseFiles(files, gi, sl) {
+    let file = files.shift();
+    if (file) {
+      mm.parseFile(global_loc + sl + file, { duration: true }).then( metadata => {
+        playList.push({
+          index: gi,
+          song: file,
+          song_name: metadata.common.title || file,
+          duration: metadata.format.duration
+        });
+        song_list.append(`<li class="list">
+                <span class="index">${playList[gi].index + 1}</span>
+                <span class="song">${playList[gi].song_name}</span>
+                <span class="duration">${toTime(playList[gi].duration)}</span>
+                </li>`);
+        parseFiles(files, gi + 1, sl); // Start parsing next file
+      });
+    }
+}
 
 ipc.on('update-download', (event, perc) => {
     play_header.html('Download Progress : ' + parseInt(perc) + '%');
