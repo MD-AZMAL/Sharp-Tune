@@ -13,7 +13,8 @@
   },
   "devDependencies": {
     "electron": "^2.0.2",
-    "electron-builder": "^20.14.7"
+    "electron-builder": "^20.14.7",
+    "electron-packager": "^14.0.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -21,7 +22,8 @@
     "pack": "build --dir",
     "dist": "build",
     "gh-publish": "build --win -p always",
-    "gh-publish-linux": "build --linux -p always"
+    "gh-publish-linux": "build --linux -p always",
+    "package-win": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"Sharp-Tune\""
   },
   "build": {
     "appId": "com.sharp-tune.www",
