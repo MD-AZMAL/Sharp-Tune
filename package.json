@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "electron": "^2.0.2",
-    "electron-builder": "^20.14.7"
+    "electron-builder": "^20.44.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
